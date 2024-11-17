@@ -22,6 +22,16 @@
         background-color: #fff;
       }
     </style>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+    emailjs.init({
+    publicKey: "EXM1NtCxfimV6531g",
+    });})();
+</script>
+    <script src="email.js"></script>
   </head>
   <body class="bg-light">
     <div class="container">
@@ -99,7 +109,7 @@
               terms and policies.
             </label>
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
+          <button type="submit" class="btn btn-primary btn-block" onclick="sendmail()">
             Submit
           </button>
         </form>
