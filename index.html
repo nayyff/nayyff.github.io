@@ -123,11 +123,6 @@
           </div>
         </div>
 
-        <!-- <div id="proof-upload" class="form-group mt-2" style="display: none;">
-          <label for="media" class="form-check-label">Upload proof of payment :</label>
-          <input class="form-control-file" type="file" name="media" id="media" required/>
-        </div> -->
-
         <div id="proof-upload" class="form-group mt-2" style="display: none;">
           <label for="media" class="form-check-label">Upload proof of payment :</label>
           <input class="form-control-file" type="file" name="media" id="media" disabled required />
@@ -228,20 +223,20 @@
   // Atur elemen "Upload proof of payment" hanya jika metode pembayaran adalah transfer atau qris
   if (paymentMethod === "cash") {
     proofUpload.style.display = "none";
-    fileInput.disabled = true; // Matikan input file
+    fileInput.disabled = true; 
   } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
     proofUpload.style.display = "block";
-    fileInput.disabled = false; // Aktifkan input file
+    fileInput.disabled = false; 
   }
 
   if (paymentMethod === "cash") {
     proofUpload.style.display = "none";
-    fileInput.required = false; // Hapus atribut required
-    fileInput.disabled = true;  // Matikan input file
+    fileInput.required = false; 
+    fileInput.disabled = true;  
   } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
     proofUpload.style.display = "block";
-    fileInput.required = true;  // Tambahkan atribut required
-    fileInput.disabled = false; // Aktifkan input file
+    fileInput.required = true;  
+    fileInput.disabled = false; 
   }
 
 }
