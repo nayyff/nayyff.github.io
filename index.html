@@ -130,7 +130,7 @@
 
         <div id="proof-upload" class="form-group mt-2" style="display: none;">
           <label for="media" class="form-check-label">Upload proof of payment :</label>
-          <input class="form-control-file" type="file" name="media" id="media" disabled />
+          <input class="form-control-file" type="file" name="media" id="media" disabled required />
         </div>
         
 
@@ -233,6 +233,17 @@
     proofUpload.style.display = "block";
     fileInput.disabled = false; // Aktifkan input file
   }
+
+  if (paymentMethod === "cash") {
+    proofUpload.style.display = "none";
+    fileInput.required = false; // Hapus atribut required
+    fileInput.disabled = true;  // Matikan input file
+  } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
+    proofUpload.style.display = "block";
+    fileInput.required = true;  // Tambahkan atribut required
+    fileInput.disabled = false; // Aktifkan input file
+  }
+
 }
 
 function showTicketInfo() {
