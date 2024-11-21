@@ -13,5 +13,5 @@ function sendmail(){
         email : document.getElementById("email").value,
     }
 
-    emailjs.send("service_ej31pff","template_ijlsp0r",parms)
+    emailjs.send("service_rj4f4am","template_ijlsp0r",parms)
 }
