@@ -199,12 +199,12 @@
   const paymentMethod = document.getElementById("payment_method").value;
   const proofUpload = document.getElementById("proof-upload");
   const fileInput = document.getElementById("media");
-
-  // Tampilkan atau sembunyikan informasi pembayaran berdasarkan metode yang dipilih
-        document.getElementById("transfer-info").style.display = paymentMethod === "transfer" ? "block" : "none";
-        document.getElementById("qris-info").style.display = paymentMethod === "qris" ? "block" : "none";
-        document.getElementById("cash-info").style.display = paymentMethod === "cash" ? "block" : "none";
-        document.getElementById("payment-info").style.display = paymentMethod ? "block" : "none";
+      
+// Sembunyikan semua informasi pembayaran terlebih dahulu
+  document.getElementById("transfer-info").style.display = "none";
+  document.getElementById("qris-info").style.display = "none";
+  document.getElementById("cash-info").style.display = "none";
+  document.getElementById("payment-info").style.display = "none";
 
   // Tampilkan informasi metode pembayaran
   if (paymentMethod === "transfer") {
