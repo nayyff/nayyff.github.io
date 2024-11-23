@@ -10,38 +10,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-  <style>
-    .form-container {
-      max-width: 500px;
-      margin: auto;
-      margin-top: 50px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-    }
-
-    .payment-info {
-      display: none;
-    }
-
-    #contact_number {
-      outline: 0;
-    }
-
-    #contact_number:valid {
-      border-color: green;
-    }
-
-    #contact_number:focus:invalid {
-      border-color: red;
-    }
-
-    #ticket-info {
-      font-size: 25px;
-    }
-  </style>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
   </script>
+
   <script type="text/javascript">
     (function () {
       emailjs.init({
@@ -85,11 +56,16 @@
       });
     })();
   </script>
+  
   <script src="email.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body>
   <div class="container">
+    <div class="ekor-kiri"></div>
+    <div class="ekor-kanan"></div>
+
     <div class="form-container">
       <h4 class="text-center mb-4">Magnolias Payment </h4>
       <form id="submit-to-google-sheet">
@@ -114,13 +90,14 @@
         <div class="form-group">
           <label for="loc">Ticket Category:</label>
 
-          <select class="form-control" name="Ticket-Category" id="Ticket-Category" required onchange="showTicketInfo();">
-  <option value="" disabled selected hidden>Choose...</option>
-  <option value="presale-1">Presale 1 (Couple Only)</option>
-  <option value="presale-2">Presale 2 (Limited 100 Slots)</option>
-  <option value="presale-3">Presale 3 (Limited 240 Slots)</option>
-  <option value="onthespot">On The Spot</option>
-</select>
+          <select class="form-control" name="Ticket-Category" id="Ticket-Category" required
+            onchange="showTicketInfo();">
+            <option value="" disabled selected hidden>Choose...</option>
+            <option value="presale-1">Presale 1 (Couple Only)</option>
+            <option value="presale-2">Presale 2 (Limited 100 Slots)</option>
+            <option value="presale-3">Presale 3 (Limited 240 Slots)</option>
+            <option value="onthespot">On The Spot</option>
+          </select>
 
           <div id="ticket-info">
             <p id="presale-1-info" style="display: none;">Harga tiket Rp300.000</p>
@@ -144,13 +121,13 @@
 
         <div id="payment-info" class="payment-info">
           <div id="transfer-info" style="display: none;">
-            <img src="Mandiri-logo.webp" alt="Bank Image" style="max-width: 50%; margin-top: 10px;">
+            <img src="asets/Mandiri-logo.webp" alt="Bank Image" style="max-width: 50%; margin-top: 10px;">
             <h1>Bank Mandiri</h1><br>
             <h2>000232323</h2>
           </div>
 
           <div id="qris-info" style="display: none;">
-            <img src="exmpl-qris.png" alt="QR Code" style="max-width: 100%; margin-top: 10px;" />
+            <img src="asets/exmpl-qris.png" alt="QR Code" style="max-width: 100%; margin-top: 10px;" />
           </div>
 
           <div id="cash-info" style="display: none;">
@@ -162,8 +139,6 @@
           <label for="media" class="form-check-label">Upload proof of payment :</label>
           <input class="form-control-file" type="file" name="media" id="media" disabled required />
         </div>
-        
-
 
         <div class="form-group form-check">
           <input class="form-check-input" type="checkbox" id="ex" required />
@@ -230,157 +205,90 @@
         });
     }
 
-//     function showPaymentInfo() {
-//   const paymentMethod = document.getElementById("payment_method").value;
-//   const proofUpload = document.getElementById("proof-upload");
-//   const fileInput = document.getElementById("media");
+    function showPaymentInfo() {
+      const ticketCategory = document.getElementById("Ticket-Category").value;
+      const paymentMethod = document.getElementById("payment_method").value;
+      const proofUpload = document.getElementById("proof-upload");
+      const fileInput = document.getElementById("media");
 
-//   // Sembunyikan semua informasi pembayaran terlebih dahulu
-//   document.getElementById("transfer-info").style.display = "none";
-//   document.getElementById("qris-info").style.display = "none";
-//   document.getElementById("cash-info").style.display = "none";
-//   document.getElementById("payment-info").style.display = "none";
+      // Sembunyikan semua informasi pembayaran terlebih dahulu
+      document.getElementById("transfer-info").style.display = "none";
+      document.getElementById("qris-info").style.display = "none";
+      document.getElementById("cash-info").style.display = "none";
+      document.getElementById("payment-info").style.display = "none";
 
-//   // Tampilkan informasi metode pembayaran
-//   if (paymentMethod === "transfer") {
-//     document.getElementById("transfer-info").style.display = "block";
-//   } else if (paymentMethod === "qris") {
-//     document.getElementById("qris-info").style.display = "block";
-//   } else if (paymentMethod === "cash") {
-//     document.getElementById("cash-info").style.display = "block";
-//   }
+      // Atur metode pembayaran berdasarkan kategori tiket
+      if (ticketCategory === "presale-1" || ticketCategory === "presale-2" || ticketCategory === "presale-3") {
+        // Cash tidak tersedia, hanya Transfer dan QRIS
+        document.querySelector("option[value='cash']").style.display = "none";
+        document.querySelector("option[value='transfer']").style.display = "block";
+        document.querySelector("option[value='qris']").style.display = "block";
 
-//   // Tampilkan container payment-info jika ada metode pembayaran yang dipilih
-//   if (paymentMethod) {
-//     document.getElementById("payment-info").style.display = "block";
-//   }
+        if (paymentMethod === "transfer") {
+          document.getElementById("transfer-info").style.display = "block";
+        } else if (paymentMethod === "qris") {
+          document.getElementById("qris-info").style.display = "block";
+        }
+      } else if (ticketCategory === "onthespot") {
+        // Semua metode pembayaran tersedia
+        document.querySelector("option[value='cash']").style.display = "block";
+        document.querySelector("option[value='transfer']").style.display = "block";
+        document.querySelector("option[value='qris']").style.display = "block";
 
-//   // Atur elemen "Upload proof of payment" hanya jika metode pembayaran adalah transfer atau qris
-//   if (paymentMethod === "cash") {
-//     proofUpload.style.display = "none";
-//     fileInput.disabled = true; 
-//   } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
-//     proofUpload.style.display = "block";
-//     fileInput.disabled = false; 
-//   }
+        if (paymentMethod === "cash") {
+          document.getElementById("cash-info").style.display = "block";
+        } else if (paymentMethod === "transfer") {
+          document.getElementById("transfer-info").style.display = "block";
+        } else if (paymentMethod === "qris") {
+          document.getElementById("qris-info").style.display = "block";
+        }
+      }
 
-//   if (paymentMethod === "cash") {
-//     proofUpload.style.display = "none";
-//     fileInput.required = false; 
-//     fileInput.disabled = true;  
-//   } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
-//     proofUpload.style.display = "block";
-//     fileInput.required = true;  
-//     fileInput.disabled = false; 
-//   }
+      // Tampilkan container payment-info jika ada metode pembayaran yang dipilih
+      if (paymentMethod) {
+        document.getElementById("payment-info").style.display = "block";
+      }
 
-// }
+      // Atur elemen "Upload proof of payment" hanya jika metode pembayaran adalah transfer atau qris
+      if (paymentMethod === "cash") {
+        proofUpload.style.display = "none";
+        fileInput.required = false;
+        fileInput.disabled = true;
+      } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
+        proofUpload.style.display = "block";
+        fileInput.required = true;
+        fileInput.disabled = false;
+      }
 
-// function showTicketInfo() {
-//   const ticketCategory = document.getElementById("Ticket-Category").value;
-
-//   // Sembunyikan semua informasi tiket terlebih dahulu
-//   document.getElementById("presale-1-info").style.display = "none";
-//   document.getElementById("presale-2-info").style.display = "none";
-//   document.getElementById("presale-3-info").style.display = "none";
-//   document.getElementById("onthespot-info").style.display = "none";
-
-//   // Tampilkan informasi berdasarkan kategori tiket yang dipilih
-//   if (ticketCategory === "presale-1") {
-//     document.getElementById("presale-1-info").style.display = "block";
-//   } else if (ticketCategory === "presale-2") {
-//     document.getElementById("presale-2-info").style.display = "block";
-//   } else if (ticketCategory === "presale-3") {
-//     document.getElementById("presale-3-info").style.display = "block";
-//   } else if (ticketCategory === "onthespot") {
-//     document.getElementById("onthespot-info").style.display = "block";
-//   }
-// }
-
-function showPaymentInfo() {
-  const ticketCategory = document.getElementById("Ticket-Category").value;
-  const paymentMethod = document.getElementById("payment_method").value;
-  const proofUpload = document.getElementById("proof-upload");
-  const fileInput = document.getElementById("media");
-      
-// Sembunyikan semua informasi pembayaran terlebih dahulu
-  document.getElementById("transfer-info").style.display = "none";
-  document.getElementById("qris-info").style.display = "none";
-  document.getElementById("cash-info").style.display = "none";
-  document.getElementById("payment-info").style.display = "none";
-
-  // Atur metode pembayaran berdasarkan kategori tiket
-  if (ticketCategory === "presale-1" || ticketCategory === "presale-2" || ticketCategory === "presale-3") {
-    // Cash tidak tersedia, hanya Transfer dan QRIS
-    document.querySelector("option[value='cash']").style.display = "none";
-    document.querySelector("option[value='transfer']").style.display = "block";
-    document.querySelector("option[value='qris']").style.display = "block";
-
-    if (paymentMethod === "transfer") {
-      document.getElementById("transfer-info").style.display = "block";
-    } else if (paymentMethod === "qris") {
-      document.getElementById("qris-info").style.display = "block";
+      // Reset payment method jika opsi tidak sesuai dengan kategori tiket
+      if ((ticketCategory === "presale-1" || ticketCategory === "presale-2" || ticketCategory === "presale-3") && paymentMethod === "cash") {
+        document.getElementById("payment_method").value = "";
+      }
     }
-  } else if (ticketCategory === "onthespot") {
-    // Semua metode pembayaran tersedia
-    document.querySelector("option[value='cash']").style.display = "block";
-    document.querySelector("option[value='transfer']").style.display = "block";
-    document.querySelector("option[value='qris']").style.display = "block";
 
-    if (paymentMethod === "cash") {
-      document.getElementById("cash-info").style.display = "block";
-    } else if (paymentMethod === "transfer") {
-      document.getElementById("transfer-info").style.display = "block";
-    } else if (paymentMethod === "qris") {
-      document.getElementById("qris-info").style.display = "block";
+    function showTicketInfo() {
+      const ticketCategory = document.getElementById("Ticket-Category").value;
+
+      // Sembunyikan semua informasi tiket terlebih dahulu
+      document.getElementById("presale-1-info").style.display = "none";
+      document.getElementById("presale-2-info").style.display = "none";
+      document.getElementById("presale-3-info").style.display = "none";
+      document.getElementById("onthespot-info").style.display = "none";
+
+      // Tampilkan informasi berdasarkan kategori tiket yang dipilih
+      if (ticketCategory === "presale-1") {
+        document.getElementById("presale-1-info").style.display = "block";
+      } else if (ticketCategory === "presale-2") {
+        document.getElementById("presale-2-info").style.display = "block";
+      } else if (ticketCategory === "presale-3") {
+        document.getElementById("presale-3-info").style.display = "block";
+      } else if (ticketCategory === "onthespot") {
+        document.getElementById("onthespot-info").style.display = "block";
+      }
+
+      // Panggil fungsi showPaymentInfo untuk memperbarui metode pembayaran berdasarkan kategori tiket
+      showPaymentInfo();
     }
-  }
-
-  // Tampilkan container payment-info jika ada metode pembayaran yang dipilih
-  if (paymentMethod) {
-    document.getElementById("payment-info").style.display = "block";
-  }
-
-  // Atur elemen "Upload proof of payment" hanya jika metode pembayaran adalah transfer atau qris
-  if (paymentMethod === "cash") {
-    proofUpload.style.display = "none";
-    fileInput.required = false;
-    fileInput.disabled = true;
-  } else if (paymentMethod === "transfer" || paymentMethod === "qris") {
-    proofUpload.style.display = "block";
-    fileInput.required = true;
-    fileInput.disabled = false;
-  }
-
-  // Reset payment method jika opsi tidak sesuai dengan kategori tiket
-  if ((ticketCategory === "presale-1" || ticketCategory === "presale-2" || ticketCategory === "presale-3") && paymentMethod === "cash") {
-    document.getElementById("payment_method").value = "";
-  }
-}
-
-function showTicketInfo() {
-  const ticketCategory = document.getElementById("Ticket-Category").value;
-
-  // Sembunyikan semua informasi tiket terlebih dahulu
-  document.getElementById("presale-1-info").style.display = "none";
-  document.getElementById("presale-2-info").style.display = "none";
-  document.getElementById("presale-3-info").style.display = "none";
-  document.getElementById("onthespot-info").style.display = "none";
-
-  // Tampilkan informasi berdasarkan kategori tiket yang dipilih
-  if (ticketCategory === "presale-1") {
-    document.getElementById("presale-1-info").style.display = "block";
-  } else if (ticketCategory === "presale-2") {
-    document.getElementById("presale-2-info").style.display = "block";
-  } else if (ticketCategory === "presale-3") {
-    document.getElementById("presale-3-info").style.display = "block";
-  } else if (ticketCategory === "onthespot") {
-    document.getElementById("onthespot-info").style.display = "block";
-  }
-
-  // Panggil fungsi showPaymentInfo untuk memperbarui metode pembayaran berdasarkan kategori tiket
-  showPaymentInfo();
-}
 
 
   </script>

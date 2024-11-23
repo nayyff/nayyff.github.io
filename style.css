@@ -1,0 +1,147 @@
+body {
+    background: linear-gradient(#c364c8, #d07ad1, #f6c2e6);
+    /* overflow: hidden; */
+    background-attachment: fixed;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.ekor-kiri {
+    position: fixed;
+    /* Agar elemen ini bebas bergerak */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 533px;
+    height: 588px;
+    background: url('asets/ekor.png') no-repeat;
+    background-size: contain;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateX(-50px);
+}
+
+.ekor-kanan {
+    position: fixed;
+    bottom: 0;
+    /* left: 0;  */
+    right: 0;
+    width: 533px;
+    height: 588px;
+    background: url('asets/ekor-kanan.png') no-repeat;
+    background-size: contain;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateX(59px);
+}
+
+.container {
+    z-index: 1;
+    position: relative;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+    /* Sembunyikan scrollbar di Chrome, Edge, dan Safari */
+}
+
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.text-center,
+mb-4 {
+    text-shadow: 0 0 5px rgb(255, 230, 0), 0 0 10px rgb(168, 151, 0), 0 0 15px rgb(124, 112, 0);
+    color: #fff060;
+    font-weight: bold;
+    font-family: 'Dracolas', sans-serif;
+    font-size: 35px;
+    padding-top: 20px;
+}
+
+@font-face {
+    font-family: 'Dracolas';
+    /* Font utama untuk elemen tertentu */
+    src: url(asets/Dracolas.ttf);
+}
+
+.payment-info {
+    display: none;
+}
+
+#contact_number {
+    outline: 0;
+}
+
+#contact_number:valid {
+    border-color: green;
+}
+
+#contact_number:focus:invalid {
+    border-color: red;
+}
+
+#ticket-info {
+    font-size: 25px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 200px;
+    background-color: #c364c8 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+button:hover {
+    background-color: white !important;
+    color: #c364c8 !important;
+}
+
+/* responsive gambar ekor */
+
+/* medium */
+@media (max-width: 1199px) and (min-width: 768px) {
+
+    .ekor-kiri,
+    .ekor-kanan {
+        width: 400px;
+        height: 440px;
+    }
+
+    .ekor-kiri {
+        left: -30px;
+        transform: translateX(-30px);
+    }
+
+    .ekor-kanan {
+        right: -30px;
+        transform: translateX(30px);
+    }
+}
+
+/* Small */
+@media (max-width: 767px) {
+
+    .ekor-kiri,
+    .ekor-kanan {
+        display: none;
+    }
+}
