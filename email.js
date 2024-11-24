@@ -145,11 +145,11 @@ function sendmail(){
     emailjs.send("service_oq60f9v","template_qykiwzb",parms)
 }
 // 15
-function sendmail(){
-    let parms={
-        name : document.getElementById("name").value,
-        email : document.getElementById("email").value,
-    }
+// function sendmail(){
+//     let parms={
+//         name : document.getElementById("name").value,
+//         email : document.getElementById("email").value,
+//     }
 
-    emailjs.send("service_j2vhosh","template_7betx9g",parms)
-}
+//     emailjs.send("service_j2vhosh","template_7betx9g",parms)
+// }
