@@ -8,7 +8,7 @@ function showPaymentInfo() {
     document.getElementById("transfer-info").style.display = "none";
 
     // Atur metode pembayaran hanya untuk kategori presale-1
-    if (ticketCategory === "presale-1") {
+    if (ticketCategory === "presale-2") {
         if (paymentMethod === "transfer") {
             document.getElementById("transfer-info").style.display = "block";
         }
@@ -31,11 +31,11 @@ function showTicketInfo() {
     const ticketCategory = document.getElementById("Ticket-Category").value;
 
     // Sembunyikan semua informasi tiket terlebih dahulu
-    document.getElementById("presale-1-info").style.display = "none";
+    document.getElementById("presale-2-info").style.display = "none";
 
     // Tampilkan informasi berdasarkan kategori tiket yang dipilih
-    if (ticketCategory === "presale-1") {
-        document.getElementById("presale-1-info").style.display = "block";
+    if (ticketCategory === "presale-2") {
+        document.getElementById("presale-2-info").style.display = "block";
     }
 
     // Panggil fungsi showPaymentInfo untuk memperbarui metode pembayaran berdasarkan kategori tiket
